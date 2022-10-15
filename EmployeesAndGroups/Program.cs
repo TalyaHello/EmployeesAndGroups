@@ -3,6 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+    policy =>
+    {
+        policy.WithOrigins("https://localhost:44483");
+    });
+});
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 builder.Services.AddControllersWithViews();
 builder.Services.AddSwaggerGen(c =>
@@ -29,11 +37,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 
+app.UseCors();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller}/{action=Index}/{id?}");
+app.MapFallbackToFile("index.html");
 app.MapSwagger();
-
-app.MapFallbackToFile("index.html"); ;
 
 app.Run();
