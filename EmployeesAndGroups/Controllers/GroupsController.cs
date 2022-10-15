@@ -39,7 +39,7 @@ namespace EmployeesAndGroups.Controllers
             return @group;
         }
 
-        [HttpGet("GetGroupEmployees/{id}")]
+        [HttpGet("GroupEmployees/{id}")]
         public async Task<ActionResult<IEnumerable<Employee>>> GetGroupEmployees(int id)
         {
             var desiredGroup = await _context.Groups
@@ -51,7 +51,7 @@ namespace EmployeesAndGroups.Controllers
             return desiredGroup.Employees;
         }
 
-        [HttpGet("GetNotManagementGroupEmployees")]
+        [HttpGet("NotManagementGroupEmployees")]
         public async Task<ActionResult<List<Employee>>> GetNotManagementGroupEmployees(string letterText)
         {
             var groups = await _context.Groups

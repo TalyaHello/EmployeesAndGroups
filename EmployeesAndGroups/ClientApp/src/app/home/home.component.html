@@ -1,1 +1,13 @@
-<h1>Hello, world!</h1>
+<div style="padding: 0.5rem">
+  <h4>Введите текст письма:</h4>
+  <div style="display: flex; align-items: flex-end; gap: 3px">
+    <textarea cols="40" rows="3" [(ngModel)]="letterText"></textarea>
+    <button (click)="send(letterText)">Отправить</button>
+  </div>
+  <div *ngIf="employees.length > 0; else noEmployees">
+    <p>{{ employeesNames() }} {{ letterText }}</p>
+  </div>
+  <ng-template #noEmployees>
+    <p *ngIf="getResult">Не найдено ни одного адресата!</p>
+  </ng-template>
+</div>
