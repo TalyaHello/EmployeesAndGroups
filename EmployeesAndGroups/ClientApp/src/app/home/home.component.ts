@@ -11,13 +11,14 @@ export class HomeComponent {
   employees: Employee[] = [];
   letterText: string = '';
   getResult: boolean = false;
+  employeesNames: string = '';
 
-  employeesNames() {
-    this.employees.map((x) => x.fullName).join(', ');
-  }
   send(letterText: string): void {
     this.groupService
       .getNotManagementGroupEmployees(letterText)
-      .subscribe((empl) => (this.employees = empl));
+      .subscribe((empl) => {
+        this.employees = empl;
+        this.employeesNames = empl.map((x) => x.fullName).join(', ');
+      });
   }
 }

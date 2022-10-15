@@ -5,7 +5,7 @@
     <button (click)="send(letterText)">Отправить</button>
   </div>
   <div *ngIf="employees.length > 0; else noEmployees">
-    <p>{{ employeesNames() }} {{ letterText }}</p>
+    <p>{{ employeesNames }} {{ letterText }}</p>
   </div>
   <ng-template #noEmployees>
     <p *ngIf="getResult">Не найдено ни одного адресата!</p>
